@@ -111,3 +111,106 @@ ul li span{
 ul li span:hover{
     background: #edeef0;
 }
+.footer {
+    color: #ffffff;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+    padding: 5px;
+}
+.footer a{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* Mobile styles */
+@media only screen and (max-width: 600px) {
+    .todo-app {
+        width: 100%;
+        margin: 20px auto;
+        padding: 20px;
+        min-width: auto;
+    }
+
+    .row {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    ul li {
+        font-size: 14px;
+        padding: 10px 8px 10px 40px;
+    }
+
+    ul li span {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+        line-height: 30px;
+    }
+}
+
+/* Tablet styles */
+@media only screen and (min-width: 601px) and (max-width: 768px) {
+    .todo-app {
+        width: 90%;
+        margin: 50px auto;
+        padding: 30px;
+        min-width: auto;
+    }
+
+    .row {
+        padding: 15px;
+    }
+
+    button {
+        padding: 12px 40px;
+        font-size: 15px;
+    }
+
+    ul li {
+        font-size: 15px;
+        padding: 11px 8px 11px 45px;
+    }
+
+    ul li span {
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+        line-height: 35px;
+    }
+}
+
+/* Desktop styles */
+@media only screen and (min-width: 769px) {
+    .todo-app {
+        width: 60%;
+        margin: 100px auto 20px;
+        padding: 40px 30px 70px;
+    }
+
+    .row {
+        padding: 20px;
+    }
+
+    button {
+        padding: 16px 50px;
+        font-size: 16px;
+    }
+
+    ul li {
+        font-size: 17px;
+        padding: 12px 8px 12px 50px;
+    }
+
+    ul li span {
+        width: 40px;
+        height: 40px;
+        font-size: 22px;
+        line-height: 40px;
+    }
+}
