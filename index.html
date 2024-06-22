@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Task App</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="container">
         <div class="todo-app">
             <h2>To-Do List <img src="images/icon.png" alt=""></h2>
             <div class="row">
                 <input type="text" id="input-box" placeholder="Add your text" autofocus>
-                <button onclick="addTask()" >Add</button>
+                <button onclick="addTask()">Add</button>
             </div>
             <ul id="list-container">
                 <!-- <li class="checked">Task 1</li>
@@ -24,9 +26,8 @@
             <div>
                 <div class="">
                     <hr>
-                    <p class="">© 2024 Jahed Ahmed Ripon —
-                        <a href="https://github.com/jahedripon9"
-                                    target=" _blank">jahedripon9</a>
+                    <p class="">©<span id="footer-year"></span> Jahed Ahmed Ripon —
+                        <a href="https://github.com/jahedripon9" target=" _blank">jahedripon9</a>
                     </p>
                 </div>
             </div>
@@ -34,4 +35,5 @@
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>

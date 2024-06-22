@@ -81,3 +81,10 @@ function loadSavedTasks() {
 
 // Load saved tasks when the page loads
 document.addEventListener('DOMContentLoaded', loadSavedTasks);
+
+
+// Get the current year
+const currentYear = new Date().getFullYear();
+
+// Update the footer year
+document.getElementById('footer-year').textContent = currentYear;
