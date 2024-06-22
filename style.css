@@ -8,9 +8,24 @@
 .container {
     width: 100%;
     min-height: 100vh;
-    background: linear-gradient(135deg, #153677, #4e085f);
+    background: linear-gradient(135deg, #153677, #4e085f, #e91e63, #ff9800, #00bcd4, #8bc34a);
+    background-size: 300% 300%;
+    animation: gradientAnimation 10s ease infinite;
     padding: 10px;
-    
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .todo-app {
@@ -20,6 +35,12 @@
     margin: 100px auto 20px;
     padding: 40px 30px 70px;
     border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.todo-app:hover {
+    transform: scale(1.05);
 }
 
 .todo-app h2 {
@@ -29,6 +50,35 @@
     margin-bottom: 20px;
     text-align: center;
     justify-content: center;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    animation: textFadeIn 1s ease forwards;
+    position: relative;
+}
+
+.todo-app h2:before {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 5px;
+    background: #ff5945;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+}
+
+@keyframes textFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .todo-app h2 img {
@@ -45,6 +95,19 @@
     border-radius: 30px;
     padding-left: 20px;
     margin-bottom: 25px;
+    animation: rowFadeIn 0.8s ease forwards;
+}
+
+@keyframes rowFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 input {
@@ -53,18 +116,91 @@ input {
     outline: none;
     background: transparent;
     padding: 10px;
-    font-weight: 14px;
+    font-size: 14px;
 }
 
 button {
     border: none;
     outline: none;
-    padding: 16px 50px;
-    background: #ff5945;
+    padding: 12px 32px;
+    background: linear-gradient(135deg, #4a148c, #7b1fa2);
+    /* Gradient background */
     color: #fff;
     font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
     border-radius: 40px;
+    /* Rounded border */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* Soft shadow */
+    transition: background 0.3s, transform 0.2s, box-shadow 0.2s, color 0.3s;
+    position: relative;
+    overflow: hidden;
+    /* Hide overflow to prevent gradient spill */
+    z-index: 1;
+    /* Ensure button text stays above the gradient overlay */
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+    /* Gradient overlay */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+    /* Push overlay behind the button content */
+}
+
+button:hover::before {
+    opacity: 1;
+    /* Show gradient overlay on hover */
+}
+
+button:hover {
+    background: linear-gradient(135deg, #6200ea, #9c27b0);
+    /* Darker gradient on hover */
+    transform: translateY(-2px);
+    /* Lift the button slightly on hover */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    /* Increased shadow on hover */
+    color: #fff;
+    /* Text color on hover */
+}
+
+/* Optional: Text animation on hover */
+button span {
+    position: relative;
+    display: inline-block;
+}
+
+button span::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #4e54c8;
+    /* Text color */
+    overflow: hidden;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    background: linear-gradient(135deg, #4a148c, #7b1fa2);
+    /* Gradient background */
+    transition: clip-path 0.4s ease, color 0.4s ease;
+    z-index: -1;
+    /* Push behind the actual text */
+}
+
+button:hover span::before {
+    clip-path: polygon(0 0, 0 0, 100% 100%, 0 100%);
+    color: #fff;
+    /* Change text color on hover */
 }
 
 ul li {
@@ -74,29 +210,49 @@ ul li {
     user-select: none;
     cursor: pointer;
     position: relative;
+    transition: background 0.3s ease, opacity 0.3s ease;
+    animation: itemFadeIn 0.5s ease forwards;
 }
-ul li::before{
+
+ul li:hover {
+    background: #f1f1f1;
+}
+
+@keyframes itemFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+ul li::before {
     content: '';
     position: absolute;
     height: 28px;
     width: 28px;
-    break-before: 50px;
     background-image: url(images/unchecked.png);
     background-size: cover;
     background-position: center;
     top: 12px;
     left: 8px;
-}
-ul li.checked{
-color: #555;
-text-decoration: line-through;
+    transition: opacity 0.3s ease;
 }
 
-ul li.checked::before{
+ul li.checked {
+    color: #555;
+    text-decoration: line-through;
+}
+
+ul li.checked::before {
     background-image: url(images/checked.png);
 }
 
-ul li span{
+ul li span {
     position: absolute;
     right: 0;
     top: 5px;
@@ -107,19 +263,69 @@ ul li span{
     line-height: 40px;
     text-align: center;
     border-radius: 50%;
+    transition: background 0.3s ease, transform 0.3s ease;
 }
-ul li span:hover{
+
+ul li span:hover {
     background: #edeef0;
+    transform: scale(1.1);
 }
+
+ul li.added {
+    animation: itemAdd 0.5s ease forwards;
+}
+
+@keyframes itemAdd {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+ul li.removed {
+    animation: itemRemove 0.5s ease forwards;
+}
+
+@keyframes itemRemove {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
 .footer {
     color: #ffffff;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-align: center;
     padding: 5px;
 }
-.footer a{
+
+.footer a {
     color: #ffffff;
     text-decoration: none;
+}
+
+/* Example CSS for smooth animations */
+li.added {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+li.removed {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 /* Mobile styles */

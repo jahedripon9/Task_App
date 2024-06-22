@@ -1,37 +1,66 @@
 const inputBox = document.getElementById("input-box");
 const listContainer = document.getElementById("list-container");
 
+// Function to add a new task
 function addTask() {
     if (inputBox.value === '') {
-        alert("You must write something");
+        alert("Please enter a task.");
+        return;
     }
-    else {
-        let li = document.createElement('li');
-        li.innerHTML = inputBox.value;
-        listContainer.appendChild(li);
-        let span = document.createElement("span");
-        span.innerHTML = "\u00d7";
-        li.appendChild(span)
-    }
+
+    const li = document.createElement('li');
+    li.textContent = inputBox.value.trim();
+    li.classList.add('task-item');
+
+    // Add animation classes for smooth entry
+    li.style.opacity = '0';
+    li.style.transform = 'translateX(-20px)';
+    setTimeout(() => {
+        li.style.opacity = '1';
+        li.style.transform = 'translateX(0)';
+    }, 100);
+
+    const span = document.createElement("span");
+    span.textContent = "\u00d7";
+    li.appendChild(span);
+    listContainer.appendChild(li);
+
     inputBox.value = '';
     saveData();
 }
 
+// Event listener for clicks on list items and delete buttons
 listContainer.addEventListener('click', function (e) {
     if (e.target.tagName === "LI") {
         e.target.classList.toggle("checked");
         saveData();
-    }
-    else if (e.target.tagName === "SPAN") {
-        e.target.parentElement.remove();
-        saveData();
+    } else if (e.target.tagName === "SPAN") {
+        const li = e.target.parentElement;
+
+        // Add animation classes for smooth exit
+        li.style.opacity = '0';
+        li.style.transform = 'translateX(-20px)';
+        setTimeout(() => {
+            li.remove();
+            saveData();
+        }, 300);
     }
 }, false);
 
+// Function to save tasks to localStorage
 function saveData() {
-    localStorage.setItem("data", listContainer.innerHTML);
+    localStorage.setItem("tasks", listContainer.innerHTML);
 }
-function showData() {
-    listContainer.innerHTML = localStorage.getItem("data");
+
+// Function to load tasks from localStorage
+function loadSavedTasks() {
+    const savedTasks = localStorage.getItem("tasks");
+    if (savedTasks) {
+        listContainer.innerHTML = savedTasks;
+    }
 }
-showData();
+
+// Load tasks when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    loadSavedTasks();
+});
